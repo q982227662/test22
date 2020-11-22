@@ -1,0 +1,16 @@
+{
+  "name": "music_searcher",
+  "version": "1.0.0",
+  "description": "This is a music search app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zhihao Li",
+  "license": "MIT",
+  "dependencies": {
+    "fetch-json": "^2.2.9",
+    "fetch-jsonp": "^1.1.3"
+  },
+  "keywords": []
+}
