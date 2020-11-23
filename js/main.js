@@ -7,19 +7,7 @@ $(document).ready(function(){
     var tempName = "tests"
 
     $("#search-form").submit(function (event){
-        console.log("asd");
-        $.ajax({
-            type: "POST",
-            url: "http://178.128.180.197:5000/song/add",
-            data:'{"name":"tempName","artist":"tempArtist","url":"tempURL"}',  
-            dataType: "json",
-            success: function(data) {
-                alert(data.d);
-            },
-            error: function(data){
-                alert("fail");
-            }
-        });
+
         event.preventDefault()
         var search = $("#search-text").val()
 
@@ -52,7 +40,12 @@ $(document).ready(function(){
                     //clear results
                     // loop through every music in the element by checking the song
 
-                        
+                        var temp = {
+                            name:results.trackName,
+                            artist:results.artistName,
+                            url:results.previewUrl
+                        }
+   
                         const div = document.createElement("div");
                         div.classList.add("card");
                         div.innerHTML = 
@@ -72,18 +65,27 @@ $(document).ready(function(){
                         </ul>
                         <div class="card-body">
                           <a href=${results.trackViewUrl} class="card-link">Show in itunes</a>
-                          <button id ="uploadbtn" type="button" class="btn btn-primary btn-sm">Add</button>                
-                          <script>$("button").click(function(){
-                            $.post({
-                                url:{databaseurl},
-                                dataType:"jsonp",
-                                data:{${results.artistId},${results.trackName},${results.artistName},${results.trackViewUrl}},  
-                                function( response ) {
-                                    console.log( response );
-                            }
-                            );
-                            </script>
+                          <button id =${integer} type="button" class="btn btn-primary btn-sm">Add</button>                
+                          </script>
                         </div>`;
+
+                        $(document).on('click',integer,function(){
+                            console.log(integer);
+                            $.ajax({
+                                type: "POST",
+                                contentType:"application/json",
+                                url: "http://178.128.180.197:5000/song/add",
+                                data: JSON.stringify(temp),
+                                dataType: "JSON",
+                                success: function(data) {
+                                    alert(integer);
+                                },
+                                error: function(data){
+                                    alert("fail");
+                                }
+                            });
+                        })
+                        integer = integer + 1; 
                         outputs.appendChild(div);
                 });
             }
