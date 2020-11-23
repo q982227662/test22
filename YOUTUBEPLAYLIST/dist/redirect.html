@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube playlist searcher</title>
+
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Playlounge</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="navbar-collapse collapse show" id="navbarColor01" style="">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/itunes.html">Itunes music</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/playlistsearch.html">Playlist search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/musicsearch.html">Music video</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+    <div class="container">
+      <h1>Youtube Playlists</h1>  
+      <div class="form-group">
+        <button id="myplaylist" class="btn btn-primary">My Playlist</button>
+         <input type="text" placeholder="channelId" class="form-control" id="channelId">
+            <button id="buttonid" class="btn btn-primary">Submit</button>
+           <input type="text" placeholder="username" class="form-control" id="usernamefield">
+           <button id="usernamebutton" class="btn btn-primary">Submit</button>
+           <input type="text" placeholder="search" class="form-control" id="search">
+           <button id="searchbutton" class="btn btn-primary">Submit</button>
+
+        </div>
+
+       <div id="results1">
+        <!--display playlist -->
+       </div>
+       <div id="results2">
+        <!--display playlist with chan id -->    
+       </div>
+       <div id="results3">
+        <!--display playlist with username-->    
+       </div>
+       <div id="results4">
+        <!--display playlist with search-->
+       </div>
+       </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/redirect.6946beb2.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</html>
