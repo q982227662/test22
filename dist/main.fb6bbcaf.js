@@ -117,23 +117,64 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"playlist.js":[function(require,module,exports) {
+})({"js/main.js":[function(require,module,exports) {
 $(document).ready(function () {
-  var API_KEY = "AIzaSyC5ln_nE3PNS2MvmgAu4cB0YGDd49Rke8w";
-  var redirect_uri = "http://localhost:1234/redirect.html";
-  var client_id = "1064710241183-09tdvsnm4th6dokv8d84sr4ft2jhh904.apps.googleusercontent.com";
-  var scope = "https://www.googleapis.com/auth/youtube";
-  var url = "";
-  $("#login").click(function () {
-    signIn(client_id, redirect_uri, scope, url);
-  });
+  var databaseurl = "http://178.128.180.197:5000/song/add";
+  var video = '';
+  var tempURL = "https://google.com";
+  var tempArtist = "asd";
+  var tempId = "asd";
+  var tempName = "tests";
+  $("#search-form").submit(function (event) {
+    console.log("asd");
+    $.ajax({
+      type: "POST",
+      url: "http://178.128.180.197:5000/song/add",
+      data: '{"name":"tempName","artist":"tempArtist","url":"tempURL"}',
+      dataType: "json",
+      success: function success(data) {
+        alert(data.d);
+      },
+      error: function error(data) {
+        alert("fail");
+      }
+    });
+    event.preventDefault();
+    var search = $("#search-text").val();
+    videoSearch(search);
+  }); //   $("#button").on('click',function(){
+  //})
 
-  function signIn(client_id, redirect_uri, scope, url) {
-    url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" + redirect_uri + "&prompt=consent&response_type=code&client_id=" + client_id + "&scope=" + scope + "&access_type=offline";
-    window.location = url;
+  function videoSearch(search) {
+    $.ajax({
+      url: "https://itunes.apple.com/search?term=" + search,
+      dataType: "jsonp",
+      success: function success(response) {
+        console.log(response); //clear results
+
+        results.innerHTML = ''; // loop through every music in the element by checking the song
+
+        if (results.count === 0) {
+          showAlert('Nothing Found!', 'danger');
+          return;
+        }
+
+        var integer = 0;
+        var outputs = document.querySelector("#results");
+        outputs.innerHTML = '';
+        response.results.forEach(function (results) {
+          //clear results
+          // loop through every music in the element by checking the song
+          var div = document.createElement("div");
+          div.classList.add("card");
+          div.innerHTML = "           \n                        <img class=\"card-img-top\" src=".concat(results.artworkUrl100, " alt=\"Album Artwork\">\n                        <div class=\"card-body\" >\n                          <h5 class=\"card-title\">").concat(results.trackName, "</h5>\n                          <p class=\"card-text\">").concat(results.artistName, "</p>\n                        </div>\n                        <ul class=\"list-group list-group-flush\">\n                          <li class=\"list-group-item\">").concat(results.collectionName, "</li>\n                          <li class=\"list-group-item\">").concat(results.primaryGenreName, " . ").concat(results.releaseDate.split('-', 1), "</li>\n                \n                          <li class=\"list-group-item\">sample: <br>\n                                <audio src =").concat(results.previewUrl, " controls='controls'>\n                                </audio></li>\n                        </ul>\n                        <div class=\"card-body\">\n                          <a href=").concat(results.trackViewUrl, " class=\"card-link\">Show in itunes</a>\n                          <button id =\"uploadbtn\" type=\"button\" class=\"btn btn-primary btn-sm\">Add</button>                \n                          <script>$(\"button\").click(function(){\n                            $.post({\n                                url:{databaseurl},\n                                dataType:\"jsonp\",\n                                data:{").concat(results.artistId, ",").concat(results.trackName, ",").concat(results.artistName, ",").concat(results.trackViewUrl, "},  \n                                function( response ) {\n                                    console.log( response );\n                            }\n                            );\n                            </script>\n                        </div>");
+          outputs.appendChild(div);
+        });
+      }
+    });
   }
 });
-},{}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -161,7 +202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51436" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58980" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -337,5 +378,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","playlist.js"], null)
-//# sourceMappingURL=/playlist.js.map
+},{}]},{},["../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/main.js"], null)
+//# sourceMappingURL=/main.fb6bbcaf.js.map

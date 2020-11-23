@@ -117,23 +117,23 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"playlist.js":[function(require,module,exports) {
+})({"script.js":[function(require,module,exports) {
 $(document).ready(function () {
   var API_KEY = "AIzaSyC5ln_nE3PNS2MvmgAu4cB0YGDd49Rke8w";
-  var redirect_uri = "http://localhost:1234/redirect.html";
-  var client_id = "1064710241183-09tdvsnm4th6dokv8d84sr4ft2jhh904.apps.googleusercontent.com";
-  var scope = "https://www.googleapis.com/auth/youtube";
-  var url = "";
-  $("#login").click(function () {
-    signIn(client_id, redirect_uri, scope, url);
+  $("#search-form").submit(function (event) {
+    event.preventDefault();
+    alert("submitted form");
+    var search = $("#search").val();
+    videoSearch(API_KEY, search, 10);
   });
 
-  function signIn(client_id, redirect_uri, scope, url) {
-    url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" + redirect_uri + "&prompt=consent&response_type=code&client_id=" + client_id + "&scope=" + scope + "&access_type=offline";
-    window.location = url;
+  function videoSearch(key, search, maxResults) {
+    $.get("https://www.googleapis.com/youtube/v3/search?key=" + key + +"&type=video&part=snippet&maxResults=10&q=" + search, function (data) {
+      console.log(data);
+    });
   }
 });
-},{}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -161,7 +161,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51436" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58980" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -337,5 +337,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","playlist.js"], null)
-//# sourceMappingURL=/playlist.js.map
+},{}]},{},["../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","script.js"], null)
+//# sourceMappingURL=/script.js.map
